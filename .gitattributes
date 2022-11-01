@@ -63,4 +63,4 @@
 #*.RTF   diff=astextplain
 
 ###############################################################################
-Notebooks/** linguist-vendored
+DS_Project_001/Modular/Notebooks/** linguist-vendored
