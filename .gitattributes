@@ -63,4 +63,5 @@
 #*.RTF   diff=astextplain
 
 ###############################################################################
-DS_Project_001/Modular/Notebooks/** linguist-vendored
+* linguist-vendored
+*.py linguist-vendored=false
