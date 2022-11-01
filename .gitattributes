@@ -63,4 +63,4 @@
 #*.RTF   diff=astextplain
 
 ###############################################################################
-#*.ipynb linguist-documentation
+.ipynb linguist-documentation
