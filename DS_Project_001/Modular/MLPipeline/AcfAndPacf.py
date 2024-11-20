@@ -2,7 +2,6 @@ import statsmodels.graphics.tsaplots as sgt
 import matplotlib.pyplot as plt
 
 
-
 class AcfAndPcf:
 
     def __init__(self, df_comp):

@@ -1,9 +1,5 @@
 # from statsmodels.tsa.arima_model import ARMA
 from scipy.stats.distributions import chi2
-
-# import statsmodels.tsa.api as tsa
-# import statsmodels.api as sm
-
 import statsmodels.tsa.arima.model as tsa
 
 

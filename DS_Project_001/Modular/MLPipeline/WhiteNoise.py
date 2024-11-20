@@ -53,7 +53,8 @@ class WhiteNoise:
 
     def generate_whitenoise(self):
 
-        wn = np.random.normal(loc=self.df_comp.IOT_Reading.mean(), scale=self.df_comp.IOT_Reading.std(),
+        wn = np.random.normal(loc=self.df_comp.IOT_Reading.mean(),
+                              scale=self.df_comp.IOT_Reading.std(),
                               size=len(self.df_comp))
         self.df_comp["wn"] = wn
 
