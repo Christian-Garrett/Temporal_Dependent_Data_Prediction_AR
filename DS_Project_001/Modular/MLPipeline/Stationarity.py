@@ -3,24 +3,13 @@ import statsmodels.tsa.stattools as sts
 from statsmodels.tsa.seasonal import seasonal_decompose
 
 
-class Stationarity:
+def check_stationarity(self):
+    print(sts.adfuller(self.data.wn))
+    print(sts.adfuller(self.data.IOT_Reading))
+    print(sts.adfuller(self.walk))
+    print(sts.kpss(self.data.IOT_Reading, regression='c'))
+    print(sts.kpss(self.data.wn, regression='c'))
 
-    def __init__(self, df_comp, walk):
-        self.df_comp = df_comp
-
-        print(sts.adfuller(df_comp.wn))
-        print(sts.adfuller(df_comp.IOT_Reading))
-        print(sts.adfuller(walk))
-        print(sts.kpss(df_comp.IOT_Reading, regression='c'))
-        print(sts.kpss(df_comp.wn, regression='c'))
-
-        self.seasonality_test(df_comp)
-
-
-    def seasonality_test(self, df_comp):
-        # Seasonality
-        # Naive decomposition
-        additive = seasonal_decompose(df_comp.IOT_Reading, model="additive")
-        additive.plot()
-        plt.savefig("Modular/output/"+"seasonality.png")
-
+    additive = seasonal_decompose(self.data.IOT_Reading, model="additive")
+    additive.plot()
+    plt.savefig("Modular/output/"+"seasonality.png")

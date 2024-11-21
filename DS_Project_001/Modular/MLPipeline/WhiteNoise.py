@@ -4,58 +4,36 @@ import numpy as np
 import pandas as pd
 
 
+def generate_whitenoise(self):
+
+    wn = np.random.normal(loc=self.data.IOT_Reading.mean(),
+                            scale=self.data.IOT_Reading.std(),
+                            size=len(self.data))
+    self.data["wn"] = wn
 
 
-class WhiteNoise:
+def plot_data_comparison(self):
 
-    def __init__(self, df_comp):
+    df = pd.DataFrame({'IOT_Reading' : self.data.IOT_Reading}, index=self.data.index)
+    df.plot(figsize=(20,5))
 
-        self.df_comp = df_comp
-
-        # Generate Random Whitenoise data
-        self.generate_whitenoise()
-
-        # plot comparison data
-        self.plot_data_comparison()
-
-        # plot autocorrelation
-        self.autocorrelation_plot()
-
-
-    def autocorrelation_plot(self):
-
-        autocorrelation_plot(self.df_comp.IOT_Reading)
-        plt.savefig("Modular/output/"+"autocorrelationIOT.png")
-
-        # Plot shows pos correlation with lag values but there is no significant relationship. 
-        # No cycles/trends
-        autocorrelation_plot(self.df_comp.wn)
-        plt.savefig("Modular/output/"+"WN.png")
+    self.data.wn.plot(figsize=(20,5))
+    plt.title("White noise time-series", size=24)
+    plt.savefig("Modular/output/"+"whitenoise.png")
+    self.data.IOT_Reading.plot(figsize=(20,5))
+    plt.title("IOT_Reading_Series", size=24)
+    plt.savefig("Modular/output/"+"IOT_Reading.png")
+    self.data.wn.plot(figsize=(20,5))
+    self.data.IOT_Reading.plot(figsize=(20,5))
+    plt.title("White noise vs IOT_Reading Series", size=24)
+    plt.savefig("Modular/output/"+"compWNvsIOT.png")
 
 
-    def plot_data_comparison(self):
+def plot_autocorrelation(self):
 
-        # Fixes the the illustration output issue
-        df = pd.DataFrame({'IOT_Reading' : self.df_comp.IOT_Reading}, index=self.df_comp.index)
-        df.plot(figsize=(20,5))
+    autocorrelation_plot(self.data.IOT_Reading)
+    plt.savefig("Modular/output/"+"autocorrelationIOT.png")
 
-        self.df_comp.wn.plot(figsize=(20,5))
-        plt.title("White noise time-series", size=24)
-        plt.savefig("Modular/output/"+"whitenoise.png")
-        self.df_comp.IOT_Reading.plot(figsize=(20,5))
-        plt.title("IOT_Reading_Series", size=24)
-        plt.savefig("Modular/output/"+"IOT_Reading.png")
-        self.df_comp.wn.plot(figsize=(20,5))
-        self.df_comp.IOT_Reading.plot(figsize=(20,5))
-        plt.title("White noise vs IOT_Reading Series", size=24)
-        plt.savefig("Modular/output/"+"compWNvsIOT.png")
-
-
-    def generate_whitenoise(self):
-
-        wn = np.random.normal(loc=self.df_comp.IOT_Reading.mean(),
-                              scale=self.df_comp.IOT_Reading.std(),
-                              size=len(self.df_comp))
-        self.df_comp["wn"] = wn
-
-
+    # Plot shows pos correlation with lag values but there is no significant relationship. 
+    autocorrelation_plot(self.data.wn)
+    plt.savefig("Modular/output/"+"WN.png")

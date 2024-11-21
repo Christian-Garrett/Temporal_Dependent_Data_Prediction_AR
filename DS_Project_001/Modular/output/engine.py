@@ -3,47 +3,22 @@ import seaborn as sns
 from pathlib import Path
 import os
 import sys
-sns.set()
 
 module_path = Path(__file__).parents[1]
 sys.path.append(str(module_path))
 
-from MLPipeline.WhiteNoise import WhiteNoise
-from MLPipeline.Preprocess import Preprocess
-from MLPipeline.AcfAndPacf import AcfAndPcf
-from MLPipeline.AutoRegressor import AutoRegressor
-from MLPipeline.RandomWalk import RandomWalk
-from MLPipeline.RollingWindow import RollingWindow
-from MLPipeline.Stationarity import Stationarity
+from MLPipeline import DataPipeline
 
 
 def run_pipeline():
-    # Importing the Data
-    raw_csv_data = pd.read_csv(os.path.join(module_path, 
-                                            "input/Data-Chillers.csv"))
-    
-    df_comp = raw_csv_data.copy()
 
-    # Preprocess
-    prep = Preprocess(df_comp)
+    data_path = os.path.join(module_path, "input/Data-Chillers.csv")
+    dp_object = DataPipeline(data_path)
 
-    # White Noise
-    wnoise = WhiteNoise(prep.df_comp)
-
-    # Random Walk
-    wlk = RandomWalk()
-
-    # Stationarity
-    Stationarity(wnoise.df_comp, wlk.walk)
-
-    # ACF and PCF
-    AcfAndPcf(wnoise.df_comp)
-
-    # AutoRegressor
-    AutoRegressor(wnoise.df_comp)
-
-    # Rolling Window
-    RollingWindow(wnoise.df_comp)
+    dp_object.preprocess_data()
+    dp_object.perform_EDA()
+    dp_object.train_models()
+    dp_object.evaluate_models()
 
 
 run_pipeline()

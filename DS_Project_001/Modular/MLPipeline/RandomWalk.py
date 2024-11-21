@@ -3,16 +3,11 @@ import matplotlib.pyplot as plt
 from pandas.plotting import autocorrelation_plot
 
 
-class RandomWalk:
+def generate_randomwalk(self):
 
-    def __init__(self):
+        walk = [99]  # Initial value of the walk
+        walk.extend(walk[-1] + (-1 if np.random.random() < 0.5 else 1) for _ in range(1900))
 
-        walk = [99]
-
-        for i in range(1900):
-            # Create random noise
-            noise = -1 if np.random.random() < 0.5 else 1
-            walk.append(walk[-1] + noise)
 
         plt.plot(walk)
         plt.savefig("Modular/output/"+"randomwalk.png")
