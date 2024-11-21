@@ -52,7 +52,6 @@ class DataPipeline:
     from MLPipeline.RollingWindow import check_windows
 
 
-
     def __init__(self, data_path):
 
         self.data_path=data_path
@@ -91,7 +90,6 @@ class DataPipeline:
             None if i==0 else print(self.LLR_Test(report_list[i-1].llf, report_list[i].llf))
 
         self.check_windows()
-
 
     @classmethod
     def LLR_Test(self, model_1, model_2, DF=1):
