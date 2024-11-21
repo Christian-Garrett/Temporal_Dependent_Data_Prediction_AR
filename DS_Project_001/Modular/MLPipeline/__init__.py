@@ -11,7 +11,7 @@ import statsmodels.tsa.arima.model as tsa
 
 
 class DataPipeline:
-    from MLPipeline.Preprocess import (plot_data,
+    from MLPipeline.Preprocess import (plot_line_graphs,
                                        reshape_data,
                                        fill_missing_values,
                                        set_freq,
@@ -34,7 +34,7 @@ class DataPipeline:
         self.model_list=[]
 
     def preprocess_data(self):     
-        self.plot_data()  # Plotting the data as line plots
+        self.plot_line_graphs()  # Plotting the data as line graphs
         self.plot_QQPlots()  # Plotting the data as QQPlots
         self.set_date_index()  # Changing the data to datetime format
         self.set_freq()  # Setting the frequency
@@ -55,12 +55,10 @@ class DataPipeline:
     
     def evaluate_models(self):
         report_list=[model.fit() for model in self.model_list]
-        for report in report_list:
-            print(report.summary())
+        for i in range(len(report_list)):
+            print(report_list[i].summary())
+            None if i==0 else print(self.LLR_Test(report_list[i-1].llf, report_list[i].llf))
 
-        for i in range(len(report_list)-1):
-            print(self.LLR_Test(report_list[i].llf, 
-                                report_list[i+1].llf))
 
     @classmethod
     def LLR_Test(self, model_1, model_2, DF=1):

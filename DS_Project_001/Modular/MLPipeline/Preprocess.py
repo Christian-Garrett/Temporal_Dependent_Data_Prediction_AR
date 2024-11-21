@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 
-def plot_data(self):
+def plot_line_graphs(self):
 
         self.data.IOT_Sensor_Reading.plot(figsize=(20,5), title="IOT_Sensor_Reading")
         plt.savefig("Modular/output/"+"IOT_Sensor.png")
