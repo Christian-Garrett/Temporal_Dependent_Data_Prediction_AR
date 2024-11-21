@@ -21,4 +21,5 @@ def run_pipeline():
     dp_object.evaluate_models()
 
 
-run_pipeline()
+if __name__ == '__main__':
+    run_pipeline()
