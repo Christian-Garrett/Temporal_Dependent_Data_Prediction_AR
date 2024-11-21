@@ -4,6 +4,7 @@ from statsmodels.tsa.seasonal import seasonal_decompose
 
 
 def check_stationarity(self):
+    
     print(sts.adfuller(self.data.wn))
     print(sts.adfuller(self.data.IOT_Reading))
     print(sts.adfuller(self.walk))
